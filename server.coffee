@@ -17,7 +17,7 @@ server	= express()
 server.configure ->
 	server.set "port", process.env.PORT or config.port
 	server.set "views", __dirname + "/views"
-	server.set "view engine", "jade"
+	server.set "view engine", "ejs"
 	server.use express.favicon()
 	server.use express.logger("dev")
 	server.use express.bodyParser()
@@ -41,9 +41,11 @@ server.get "/partials/:name", (req, res) ->
 	res.render "partials/" + name
 
 # Views that are direct linkable
-server.get ["/view1", "/view2"], (req, res) ->
+server.get "/view1", (req, res) ->
 	res.render "index"
 
+server.get "/view2", (req, res) ->
+	res.render "index"
 ###
 	Startup and log.
 ###
