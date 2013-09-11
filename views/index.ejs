@@ -15,14 +15,11 @@
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <%-js("lib/angular-ui-0.2.0/angular-ui-ieshiv.min")%>
 <![endif]-->
+
 <!-- Include our Stylesheets. See /assets/css.-->
 <!-- ==========================================================================-->
 <%-css("lib/angular-ui-0.2.0/angular-ui.min")%>
-<%-css("lib/skeleton/skeleton")%>
-<%-css("lib/skeleton/base")%>
-<%-css("lib/skeleton/layout")%>
-<%-css("lib/skeleton/docs")%>
-<%-css("fonts")%>
+<%-css("foundation.min")%>
 
 </head>
 
@@ -30,36 +27,88 @@
 <!-- ==========================================================================-->
 
 <body>
-<!-- Containers provide us with fluid layouts. If you resize the browser window, it follows!-->
-<div class="container">
-<!-- A floating navbar, snazzy!-->
-<div class="three columns sidebar">
-<nav>
-<h3 id="logo">Angular Coffeee Express</h3>
-<ul>
-  <li><a ng-href="/view1">View 1</a></li>
-  <li><a ng-href="/view2">View 2</a></li>
-</ul>
-</nav>
-</div>
+  
+  <!-- Top Bar -->
+
+  <div class="row">
+    <div class="twelve columns">
+      <ul class="nav-bar">
+        <li class="divider"></li>
+        
+        <li class="nine columns"></li>
+        
+        <li><a ng-href="/view1">View 1</a></li>
+        <li><a ng-href="/view2">View 2</a></li>
+      </ul>
+    </div>
+    <div class="twelve columns">
+
+      <h1> Nodejs Seed   <small>This is my project. It's awesome.</small>
+      <hr />
+    </div>
+  </div>
+
+  <!-- End Top Bar -->
 
 <!-- Angular's views go in this div element.-->
-<!-- ==========================================================================-->
-<div ng-view class="twelve columns offset-by-one content">
-  <!-- Loading Screen-->
-  <!-- ========================================================================-->
-  <p>Loading the Application...</p>
-</div>
-</div>
+  <!-- Main Page Content and Sidebar -->
 
-<!-- Demonstrating filters and services with a simple version example.-->
-<div class="container">
-  <div class="three columns offset-by-fourteen">
-    <App>Version: v</App>
-    
-    <span app-version></span>
+  <div class="row">
+
+    <!-- Main Blog Content -->
+    <div ng-view class="nine columns" role="content">
+
+    </div>
+
+    <!-- End Main Content -->
+
+
+    <!-- Sidebar -->
+
+    <aside class="three columns">
+
+      <h5>Categories</h5>
+      <ul class="side-nav">
+            <li><a href="#">News</a></li>
+            <li><a href="#">Code</a></li>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Fun</a></li>
+            <li><a href="#">Weasels</a></li>
+      </ul>
+
+      <div class="panel">
+            <h5>Featured</h5>
+            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
+            <a href="#">Read More &rarr;</a>
+      </div>
+
+    </aside>        
+
   </div>
-</div>
+
+<!-- Footer -->
+
+<footer class="row">
+  <div class="twelve columns">
+    <hr />
+    <div class="row">
+      <div class="six columns">
+        <p>&copy; Copyright no one at all.</p>
+      </div>
+      <div class="six columns">
+        <ul class="link-list right">
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- End Footer -->
+
 </body>
     <!-- Include our Scripts. See /assets/js.-->
     

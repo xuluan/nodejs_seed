@@ -7,7 +7,6 @@
 		"express"			: "latest",
 		"coffee-script"		: "latest",
 		"connect-assets"	: "latest",
-		"ejs"				: "latest",
-		"stylus"			: "latest"
+		"ejs"				: "latest"
 	}
 }
