@@ -8,8 +8,9 @@ helpers = require('view-helpers')
 module.exports = (server, config) ->
   views_path  = config.root + '/app/views'
   models_path = config.root + '/app/models'
-  fs.readdirSync(models_path).forEach ->
-    require(models_path + '/' + file)
+  fs.readdirSync(models_path).forEach (file) ->
+    require models_path + '/' + file
+    
   server.use express.favicon()
   
   server.set "views", views_path
@@ -35,12 +36,15 @@ module.exports = (server, config) ->
   server.use server.router
   server.use express.static(path.join(__dirname, "public"))
   
+  # server.use (req, res, next) ->
+  #   res.status(404).render('404', {})
+  
   server.use (err, req, res, next) ->
     #Log it
     console.error err.stack
 
     #Error page
-    res.send 500, 'Something broken!<br/>' + err.stack
+    res.send 500, 'Something broken!<br/><pre>' + err.stack + '</pre>'
 
 
     
