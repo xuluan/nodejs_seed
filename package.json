@@ -1,12 +1,18 @@
 {
-	"name": "nodejs_seed",
-	"description": "create a seed project with nodejs, express, angular, twiter bootstrap, monogoose, coffeescript...",
-	"version": "0.0.1",
-	"private": true,
-	"dependencies": {
-		"express"			: "latest",
-		"coffee-script"		: "latest",
-		"connect-assets"	: "latest",
-		"ejs"				: "latest"
-	}
+  "name": "nodejs_seed",
+  "description": "create a seed project with nodejs, express, angular, twiter bootstrap, monogoose, coffeescript...",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "latest",
+    "coffee-script": "latest",
+    "connect-assets": "latest",
+    "ejs": "latest"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-nodemon": "~0.1.1",
+    "grunt-coffeelint": "0.0.7",
+    "grunt-contrib-watch": "~0.5.3"
+  }
 }
