@@ -1,13 +1,14 @@
 
 ===TODO:
-1 create framework and environment:development, test, production
-2 add mongoose
-3 create a rest api
-4 auth
-5 test
-6 deploy and production mode
+1 create a rest api
+2 angular
+3 auth
+4 test
+5 deploy and production mode
 
 ===DONE
 - jade to ejs
 - styl to twitter bootstrap
 - add grunt
+- create framework and environment:development, test, production
+- add mongoose

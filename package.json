@@ -8,7 +8,8 @@
     "coffee-script": "latest",
     "connect-assets": "latest",
     "mongoose": "latest",
-    "view-helpers": "latest",    
+    "view-helpers": "latest",
+    "underscore": "latest",     
     "ejs": "latest"
   },
   "devDependencies": {

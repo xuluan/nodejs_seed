@@ -35,10 +35,12 @@
       <ul class="nav-bar">
         <li class="divider"></li>
         
-        <li class="nine columns"></li>
+        <li class="eight columns"></li>
         
         <li><a ng-href="/view1">View 1</a></li>
         <li><a ng-href="/view2">View 2</a></li>
+        <li><a ng-href="/articles/new">New Article</a></li>
+        
       </ul>
     </div>
     <div class="twelve columns">
@@ -110,10 +112,7 @@
 <!-- End Footer -->
 
 </body>
-    <!-- Include our Scripts. See /assets/js.-->
-    
-    <!-- ============================================================================-->
-    
+    <!-- Include our Scripts. See /assets/js.-->    
     <!-- Load jQuery-->
     <%-js("lib/jquery.min")%>
     <!-- Load Angular-->
@@ -121,9 +120,14 @@
     <%-js("lib/angular-ui-0.2.0/angular-ui.min")%>
     <!-- Load Angular Configuration-->
     <%-js("app")%>
-    <%-js("controllers")%>
+
+    
     <%-js("directives")%>
     <%-js("filters")%>
     <%-js("services")%>
+    
+    <!-- <%-js("services/articles")%> -->
 
+    <%-js("controllers")%>
+    <%-js("controllers/articles")%>
 </html>

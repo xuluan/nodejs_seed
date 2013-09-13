@@ -9,7 +9,7 @@ Schema = mongoose.Schema
 ###
 Article Schema
 ###
-ArticleSchema = new Schema(
+ArticleSchema = new Schema
   created:
     type: Date
     default: Date.now
@@ -34,7 +34,6 @@ ArticleSchema = new Schema(
   # user:
   #   type: Schema.ObjectId
   #   ref: "User"
-)
 
 ###
 Statics
@@ -42,4 +41,4 @@ Statics
 # ArticleSchema.statics = load: (id, cb) ->
 #   @findOne(_id: id).populate("user").exec cb
 
-mongoose.model "Article", ArticleSchema
+module.exports = mongoose.model "Article", ArticleSchema
