@@ -27,7 +27,7 @@ module.exports = (grunt) ->
         options:
           file: "server.coffee"
           ignoredFiles: ["README.md", "node_modules/**"]
-          watchedExtensions: ["js", "coffee", "css", "ejs", "json"]
+          watchedExtensions: ["js", "coffee", "css", "ejs", "json", "html"]
           watchedFolders: ["."]
           delayTime: 1
           legacyWatch: true

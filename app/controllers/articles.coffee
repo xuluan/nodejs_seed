@@ -10,7 +10,7 @@ _ = require("underscore")
 ###
 List of Articles
 ###
-exports.all = (req, res) ->
+exports.list = (req, res) ->
   Article.find().sort("-created").exec (err, articles) ->
     if err
       res.render "error",

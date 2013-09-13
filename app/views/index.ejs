@@ -37,9 +37,9 @@
         
         <li class="eight columns"></li>
         
-        <li><a ng-href="/view1">View 1</a></li>
-        <li><a ng-href="/view2">View 2</a></li>
-        <li><a ng-href="/articles/new">New Article</a></li>
+        <li><a ng-href="/#/view1">View 1</a></li>
+        <li><a ng-href="/#/view2">View 2</a></li>
+        <li><a ng-href="/#/articles/new">New Article</a></li>
         
       </ul>
     </div>
@@ -118,6 +118,9 @@
     <!-- Load Angular-->
     <%-js("lib/angular-1.0.1/angular-1.0.1.min")%>
     <%-js("lib/angular-ui-0.2.0/angular-ui.min")%>
+    <%-js("lib/angular-1.0.1/angular-resource-1.0.1.min")%>
+    
+    
     <!-- Load Angular Configuration-->
     <%-js("app")%>
 
@@ -126,8 +129,8 @@
     <%-js("filters")%>
     <%-js("services")%>
     
-    <!-- <%-js("services/articles")%> -->
+    <%-js("services/articles_service")%>
 
     <%-js("controllers")%>
-    <%-js("controllers/articles")%>
+    <%-js("controllers/articles_controller")%>
 </html>
