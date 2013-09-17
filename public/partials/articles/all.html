@@ -1,6 +1,6 @@
 
 
-<table>
+<table data-ng-init="reset()">
   <thead>
     <tr>
       <th width="200">Title</th>
@@ -14,9 +14,8 @@
       <td>{{article.title}}</td>
       <td>{{article.content}}</td>
       <td>
-        <span><a href="/#/articles/{{article._id}}/edit" class="tiny button">Edit</a></span>
+        <span><a href="/#/articles/{{$index}}/edit" class="tiny button">Edit</a></span>
         <span><button class="tiny button secondary" ng-click="remove($index)">Remove</button></span>
-        
     </tr>
   </tbody>
 </table>

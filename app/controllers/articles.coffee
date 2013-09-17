@@ -13,14 +13,12 @@ List of Articles
 exports.list = (req, res) ->
   Article.find().sort("-created").exec (err, articles) ->
     if err
-      res.render "error",
-        status: 500
+      console.err err
     else
       res.json articles
 
 exports.create = (req, res) ->
   article = new Article req.body
-  article.user = req.user
   article.save()
   res.jsonp article
 

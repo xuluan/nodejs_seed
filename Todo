@@ -1,9 +1,12 @@
 
 ===TODO:
+1 auth
 2 validation
-3 auth
+3 login and add bookmark
 4 test
 5 deploy and production mode
+6 how to keep obj when switch controller
+7 paging
 
 ===DONE
 - jade to ejs

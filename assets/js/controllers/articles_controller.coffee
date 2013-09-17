@@ -1,25 +1,27 @@
-@ArticlesController = ($scope, $routeParams, $location, Articles) ->
-  $scope.articles = Articles.query()
-  console.log $scope.articles
+@ArticlesController = ($scope, $routeParams, $location, Articles, ArticlesArchive) ->
+  $scope.articles = ArticlesArchive.getArticles()
       
+  $scope.reset = ->
+    ArticlesArchive.reset()
+    $scope.articles = ArticlesArchive.getArticles()
+
   $scope.create = ->
     article= new Articles
       title: @article.title
       content: @article.content
 
-    @articles.push article
     article.$save (response) ->
-      console.log response._id
+      console.log response
       $location.path("articles/")
-
-    @article.title = ""
-    @article.content = ""
     
   $scope.findOne = ->
-    Articles.get
-      articleId: $routeParams.articleId
-    , (article) ->
-      $scope.article = article
+    if $scope.articles[$routeParams.articleId]
+      $scope.article = $scope.articles[$routeParams.articleId]
+      $scope.submitMethod = 'update()'
+    else
+      $scope.article = new Articles
+      $scope.submitMethod = 'create()'
+      
 
   $scope.update = ->
     article = $scope.article
@@ -32,5 +34,4 @@
     article = $scope.articles[idx]
     article.$delete (response) ->
       console.log response
-      
-    $location.path("articles/")
+      $location.path("articles/")

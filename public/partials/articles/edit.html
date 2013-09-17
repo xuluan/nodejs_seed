@@ -1,6 +1,6 @@
 
 
-<form class="form-horizontal" data-ng-init="findOne()" data-ng-submit="update()">
+<form class="form-horizontal" data-ng-init="findOne()" data-ng-submit="{{submitMethod}}">
 		<label class="control-label" for="title">Title</label>
 			<input type="text" data-ng-model="article.title" id="title" placeholder="Title">
 		<label class="control-label" for="content">Content</label>
