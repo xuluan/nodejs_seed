@@ -15,4 +15,17 @@ myApp.config ($routeProvider, $locationProvider) ->
     templateUrl: "/partials/articles/new.html"
     controller: ArticlesController
     
-  $routeProvider.otherwise redirectTo: "/view1"
+  $routeProvider.when "/articles",
+    templateUrl: "/partials/articles/all.html"
+    controller: ArticlesController
+    
+  $routeProvider.when "/articles/:articleId/edit",
+    templateUrl: "/partials/articles/edit.html"
+    controller: ArticlesController
+ 
+  $routeProvider.when "/articles/:articleId/",
+    templateUrl: "/partials/articles/show.html"
+    controller: ArticlesController
+
+            
+  $routeProvider.otherwise redirectTo: "/articles"

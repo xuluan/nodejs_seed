@@ -15,7 +15,6 @@ exports.list = (req, res) ->
     if err
       res.render "error",
         status: 500
-
     else
       res.json articles
 
@@ -24,3 +23,30 @@ exports.create = (req, res) ->
   article.user = req.user
   article.save()
   res.jsonp article
+
+exports.update = (req, res) ->
+  Article.findById(req.params.articleId).exec (err, article) ->
+    if err
+      console.err err
+    else
+      article = _.extend(article, req.body)
+      article.save (err) ->
+        res.jsonp(article)
+
+exports.show = (req, res) ->
+  Article.findById(req.params.articleId).exec (err, article) ->
+    if err
+      console.err err
+    else
+      res.jsonp article
+
+exports.destroy = (req, res) ->
+  Article.findById(req.params.articleId).exec (err, article) ->
+    if err
+      console.err err
+    else
+      article.remove (err) ->
+        if err
+          console.err err
+        else
+          res.jsonp article

@@ -1,7 +1,6 @@
 
 ===TODO:
-1 create a rest api
-2 angular
+2 validation
 3 auth
 4 test
 5 deploy and production mode
@@ -12,3 +11,5 @@
 - add grunt
 - create framework and environment:development, test, production
 - add mongoose
+- rest api
+- location
