@@ -1,9 +1,5 @@
 @ArticlesController = ($scope, $routeParams, $location, Articles, ArticlesArchive) ->
   $scope.articles = ArticlesArchive.getArticles()
-      
-  $scope.reset = ->
-    ArticlesArchive.reset()
-    $scope.articles = ArticlesArchive.getArticles()
 
   $scope.create = ->
     article= new Articles
@@ -12,6 +8,7 @@
 
     article.$save (response) ->
       console.log response
+      ArticlesArchive.reset()
       $location.path("articles/")
     
   $scope.findOne = ->
@@ -26,6 +23,7 @@
   $scope.update = ->
     article = $scope.article
     article.$update ->
+      ArticlesArchive.reset()
       $location.path 'articles/'
 
 
@@ -34,4 +32,5 @@
     article = $scope.articles[idx]
     article.$delete (response) ->
       console.log response
+      ArticlesArchive.reset()
       $location.path("articles/")
