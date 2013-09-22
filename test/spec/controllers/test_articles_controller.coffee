@@ -23,8 +23,10 @@ describe "Controller: ArticlesController", ->
     )
   )
   it "should attach a list of awesomeThings to the scope", ->
-    expect(scope.awesomeThings).toBeUndefined()
+    expect(scope.articles.length).toBe 0
     $httpBackend.flush()
     expect(scope.articles.length).toBe 2
+    expect(scope.awesomeThings).toBeUndefined()
+    
 
 

@@ -4,16 +4,15 @@ module.exports = (config) ->
   config.set
     
     # base path, that will be used to resolve files and exclude
-    basePath: ""
+    basePath: ".."
     
     # testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ["jasmine"]
     
     # list of files / patterns to load in the browser
-    files: ["assets/js/lib/angular-1.0.1/angular-1.0.1.min.js",
-    "assets/js/lib/angular-ui-0.2.0/angular-ui.min.js",
-    "assets/js/lib/angular-1.0.1/angular-resource-1.0.1.min.js",
-    "assets/js/lib/angular-1.0.1/angular-mocks-1.0.1.js",
+    files: ["assets/js/lib/angular-1.0.8/angular.min.js",
+    "assets/js/lib/angular-1.0.8/angular-resource.min.js",
+    "assets/js/lib/angular-1.0.8/angular-mocks.js",
     "assets/js/app.coffee",
     "assets/js/services/articles_service.coffee",
     "assets/js/controllers/articles_controller.coffee",

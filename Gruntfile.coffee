@@ -7,7 +7,6 @@ coffeelint_files = ["./*.coffee",
         
 module.exports = (grunt) ->
   require("load-grunt-tasks") grunt
-  require("time-grunt") grunt
     
   # Project configuration.
   grunt.initConfig
@@ -47,7 +46,10 @@ module.exports = (grunt) ->
 
     karma:
       unit:
-        configFile: "karma.conf.coffee"
+        configFile: "config/karma.conf.coffee"
+        singleRun: true
+      e2e:
+        configFile: "config/karma-e2e.conf.coffee"
         singleRun: true
         
     concurrent:
