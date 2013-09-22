@@ -7,6 +7,10 @@
 5 deploy and production mode
 6 how to keep obj when switch controller
 7 paging
+8 grunt:
+- how to setup livereload
+- how to setup karma
+- how to create distribut
 
 ===DONE
 - jade to ejs
