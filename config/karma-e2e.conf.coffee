@@ -1,7 +1,7 @@
 module.exports = (config) ->
   config.set
     basePath: ".."
-    files: ["test/e2e/*.js"]
+    files: ["test/e2e/**/*.js", "test/e2e/**/*.coffee"]
     autoWatch: false
     browsers: ["Chrome"]
     frameworks: ["ng-scenario"]
@@ -14,6 +14,7 @@ module.exports = (config) ->
     "karma-chrome-launcher",
     "karma-firefox-launcher",
     "karma-jasmine",
+    "karma-coffee-preprocessor",
     "karma-ng-scenario"]
     
     junitReporter:
