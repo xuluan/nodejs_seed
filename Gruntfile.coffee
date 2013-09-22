@@ -58,5 +58,5 @@ module.exports = (grunt) ->
       server: ["watch:coffeelint", "nodemon:dev"]
   
   grunt.registerTask 'server', ['concurrent:server']
-  grunt.registerTask 'test', ['karma:unit']
+  grunt.registerTask 'test', ['karma:unit', 'karma:e2e']
   
