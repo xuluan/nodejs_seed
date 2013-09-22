@@ -14,11 +14,12 @@
   $scope.findOne = ->
     if $scope.articles[$routeParams.articleId]
       $scope.article = $scope.articles[$routeParams.articleId]
-      $scope.submitMethod = 'update()'
+
+  $scope.save = ->
+    if $scope.article._id
+      $scope.update()
     else
-      $scope.article = new Articles
-      $scope.submitMethod = 'create()'
-      
+      $scope.create()
 
   $scope.update = ->
     article = $scope.article
