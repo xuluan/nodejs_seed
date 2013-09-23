@@ -45,6 +45,19 @@ module.exports = (grunt) ->
             PORT: "3000"
 
           cwd: __dirname
+      test:
+        options:
+          file: "server.coffee"
+          ignoredFiles: ["README.md", "node_modules/**", "test/**"],
+          watchedExtensions: ["js", "coffee", "css", "ejs", "json", "html"]
+          watchedFolders: ["."]
+          delayTime: 0
+          legacyWatch: true
+          cwd: __dirname
+          env:
+            NODE_ENV : 'test'
+            
+            
 
     karma:
       unit:
@@ -58,6 +71,7 @@ module.exports = (grunt) ->
       options:
         logConcurrentOutput: true
       server: ["watch:coffeelint", "nodemon:dev"]
+      test: ["nodemon:test", "karma:e2e"]
   
   grunt.registerTask 'drop', 'drop test db', (env)->
     env= 'test' unless env
@@ -80,7 +94,8 @@ module.exports = (grunt) ->
         mongoose.connection.close(done)
 
       
+  grunt.registerTask 'e2e', ['drop:test', ]
   
   grunt.registerTask 'server', ['concurrent:server']
-  grunt.registerTask 'test', ['karma:unit', 'karma:e2e']
+  grunt.registerTask 'test', ['karma:unit', 'drop:test', 'concurrent:test']
   

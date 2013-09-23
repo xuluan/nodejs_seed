@@ -7,7 +7,7 @@ module.exports = (config) ->
     frameworks: ["ng-scenario"]
     singleRun: true
     proxies:
-      "/": "http://localhost:3000/"
+      "/": "http://localhost:4000/"
 
     urlRoot: "/__karma/"
     plugins: ["karma-junit-reporter",

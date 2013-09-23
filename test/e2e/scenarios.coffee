@@ -17,8 +17,6 @@ describe "my app", ->
     expect(element("label").count()).toBe 2
 
   it "should wait", ->
-    loop
-      continue
     expect(browser().window().href()).toBe "http://localhost:9876/#/articles"
 
 
