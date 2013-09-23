@@ -25,7 +25,9 @@ require('./config/express')(server, config)
 
 require('./config/routes')(server, config)
 
-http.createServer(server).listen '3000', ->
-  console.log 'Express server listening on port ' + '3000'
+port = process.env.PORT || config['port']
+
+http.createServer(server).listen port , ->
+  console.log 'Express server listening on port ' + port
   
 module.exports = server

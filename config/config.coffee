@@ -22,7 +22,7 @@ module.exports =
     root: rootPath
     app:
       name: 'Node Seed, test'
-    port: 3000,
+    port: 4000,
     secret: 'test',
     cookieSecret: 'test'
     google:

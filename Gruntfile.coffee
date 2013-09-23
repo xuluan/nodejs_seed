@@ -1,4 +1,6 @@
 
+
+
 coffeelint_files = ["./*.coffee",
         "./assets/**/*.coffee",
         "./app/**/*.coffee",
@@ -56,6 +58,28 @@ module.exports = (grunt) ->
       options:
         logConcurrentOutput: true
       server: ["watch:coffeelint", "nodemon:dev"]
+  
+  grunt.registerTask 'drop', 'drop test db', (env)->
+    env= 'test' unless env
+    config = require('./config/config')[env]
+    unless config
+      console.log env + " isn't exist."
+      return
+    
+    
+    mongoose = require 'mongoose'
+    mongoose.connect config.db
+    done = this.async()
+    
+    mongoose.connection.on 'open', ->
+      mongoose.connection.db.dropDatabase (err) ->
+        if err
+          console.log err
+        else
+          console.log "dropped"
+        mongoose.connection.close(done)
+
+      
   
   grunt.registerTask 'server', ['concurrent:server']
   grunt.registerTask 'test', ['karma:unit', 'karma:e2e']
