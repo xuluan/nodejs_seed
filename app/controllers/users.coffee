@@ -1,22 +1,32 @@
+
 ###
 Module dependencies.
 ###
 mongoose = require("mongoose")
 User = mongoose.model("User")
+# utils = require("../../lib/utils")
+login = (req, res) ->
+  if req.session.returnTo
+    res.redirect req.session.returnTo
+    delete req.session.returnTo
+
+    return
+  res.redirect "/"
+
+exports.signin = (req, res) ->
+
 
 ###
 Auth callback
 ###
-exports.authCallback = (req, res, next) ->
-  res.redirect "/"
-
+exports.authCallback = login
 
 ###
 Show login form
 ###
-exports.signin = (req, res) ->
-  res.render "users/signin",
-    title: "Signin"
+exports.login = (req, res) ->
+  res.render "users/login",
+    title: "Login"
     message: req.flash("error")
 
 
@@ -34,30 +44,32 @@ exports.signup = (req, res) ->
 ###
 Logout
 ###
-exports.signout = (req, res) ->
+exports.logout = (req, res) ->
   req.logout()
-  res.redirect "/"
+  res.redirect "/login"
 
 
 ###
 Session
 ###
-exports.session = (req, res) ->
-  res.redirect "/"
-
+exports.session = login
 
 ###
 Create user
 ###
 exports.create = (req, res) ->
   user = new User(req.body)
+  console.log "create user " + user
   user.provider = "local"
   user.save (err) ->
     if err
       return res.render("users/signup",
-        errors: err.errors
+        errors: "utils.errors(err.errors)"
         user: user
+        title: "Sign up"
       )
+    
+    # manually login the user once successfully signed up
     req.logIn user, (err) ->
       return next(err)  if err
       res.redirect "/"
@@ -77,13 +89,6 @@ exports.show = (req, res) ->
 
 
 ###
-Send User
-###
-exports.me = (req, res) ->
-  res.jsonp req.user or null
-
-
-###
 Find user by id
 ###
 exports.user = (req, res, next, id) ->
@@ -92,4 +97,3 @@ exports.user = (req, res, next, id) ->
     return next(new Error("Failed to load User " + id))  unless user
     req.profile = user
     next()
-

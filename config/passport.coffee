@@ -3,7 +3,8 @@ LocalStrategy = require("passport-local").Strategy
 TwitterStrategy = require("passport-twitter").Strategy
 FacebookStrategy = require("passport-facebook").Strategy
 GitHubStrategy = require("passport-github").Strategy
-GoogleStrategy = require("passport-google-oauth").Strategy
+# GoogleStrategy = require("passport-google-oauth").Strategy
+GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 UserModel= require("../app/models/user")
 User = mongoose.model("User")
 
@@ -41,12 +42,12 @@ module.exports = (passport, config) ->
       done null, user
 
   )
+
   
-  
-  #Use google strategy
+  # use google strategy
   passport.use new GoogleStrategy(
-    consumerKey: config.google.clientID
-    consumerSecret: config.google.clientSecret
+    clientID: config.google.clientID
+    clientSecret: config.google.clientSecret
     callbackURL: config.google.callbackURL
   , (accessToken, refreshToken, profile, done) ->
     User.findOne
@@ -68,3 +69,29 @@ module.exports = (passport, config) ->
         done err, user
 
   )
+  
+  # #Use google strategy
+  # passport.use new GoogleStrategy(
+  #   consumerKey: config.google.clientID
+  #   consumerSecret: config.google.clientSecret
+  #   callbackURL: config.google.callbackURL
+  # , (accessToken, refreshToken, profile, done) ->
+  #   User.findOne
+  #     "google.id": profile.id
+  #   , (err, user) ->
+  #     unless user
+  #       user = new User(
+  #         name: profile.displayName
+  #         email: profile.emails[0].value
+  #         username: profile.username
+  #         provider: "google"
+  #         google: profile._json
+  #       )
+  #       user.save (err) ->
+  #         console.log err  if err
+  #         done err, user
+  #
+  #     else
+  #       done err, user
+  #
+  # )

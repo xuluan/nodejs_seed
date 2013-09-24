@@ -1,9 +1,19 @@
+async = require('async')
 
 module.exports = (server, config, passport, auth) ->
   users = require('../app/controllers/users')
-  server.get('/signin', users.signin)
-  server.get('/signup', users.signup)
-  server.get('/signout', users.signout)
+  server.get "/login", users.login
+  server.get "/signup", users.signup
+  server.get "/logout", users.logout
+  server.post "/users", users.create
+  server.post "/users/session", passport.authenticate("local",
+    failureRedirect: "/login"
+    failureFlash: "Invalid email or password."
+  ), users.session
+  server.get "/users/:userId", users.show
+  
+  server.param('userId', users.user)
+  
   
   server.get "/", (req, res) ->
     res.render "index"
