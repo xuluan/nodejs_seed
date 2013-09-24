@@ -1,5 +1,10 @@
 
-module.exports = (server, config) ->
+module.exports = (server, config, passport, auth) ->
+  users = require('../app/controllers/users')
+  server.get('/signin', users.signin)
+  server.get('/signup', users.signup)
+  server.get('/signout', users.signout)
+  
   server.get "/", (req, res) ->
     res.render "index"
     
