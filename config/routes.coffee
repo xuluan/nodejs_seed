@@ -14,7 +14,6 @@ module.exports = (server, config, passport, auth) ->
   
   server.param('userId', users.user)
   
-  
   server.get "/", (req, res) ->
     res.render "index"
     

@@ -17,7 +17,7 @@
     "mongoose": "latest",
     "view-helpers": "latest",
     "underscore": "latest",
-    "ejs": "latest"
+    "async": "latest"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

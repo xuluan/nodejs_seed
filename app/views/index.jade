@@ -25,7 +25,15 @@ html(ng-app='myApp', lang='en')
       .twelve.columns
         ul.nav-bar
           li.divider
-          li.ten.columns
+          li.eight.columns
+          if (req.isAuthenticated())
+            li
+              a(href="/users/"+req.user.id, title="Account") Account
+            li
+              a(href="/logout", title="logout") Logout
+          else
+            li
+              a(href="/login", title="Login") Login          
           li
             a(ng-href='/#/articles/new') New Article
       .twelve.columns
