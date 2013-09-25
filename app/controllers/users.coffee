@@ -4,7 +4,7 @@ Module dependencies.
 ###
 mongoose = require("mongoose")
 User = mongoose.model("User")
-# utils = require("../../lib/utils")
+utils = require("../../lib/utils")
 login = (req, res) ->
   if req.session.returnTo
     res.redirect req.session.returnTo
@@ -64,7 +64,7 @@ exports.create = (req, res) ->
   user.save (err) ->
     if err
       return res.render("users/signup",
-        errors: "utils.errors(err.errors)"
+        errors: utils.errors(err.errors)
         user: user
         title: "Sign up"
       )

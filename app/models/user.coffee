@@ -5,22 +5,42 @@ mongoose = require("mongoose")
 Schema = mongoose.Schema
 crypto = require("crypto")
 _ = require("underscore")
-authTypes = ["github", "twitter", "facebook", "google"]
+authTypes = ["github", "twitter", "facebook", "google", "linkedin"]
 
 ###
 User Schema
 ###
 UserSchema = new Schema(
-  name: String
-  email: String
-  username: String
-  provider: String
-  hashed_password: String
-  salt: String
+  email:
+    type: String
+    default: ""
+    unique: true
+
+  username:
+    type: String
+    default: ""
+
+  provider:
+    type: String
+    default: ""
+
+  hashed_password:
+    type: String
+    default: ""
+
+  salt:
+    type: String
+    default: ""
+
+  authToken:
+    type: String
+    default: ""
+
   facebook: {}
   twitter: {}
   github: {}
   google: {}
+  linkedin: {}
 )
 
 ###
@@ -41,19 +61,26 @@ validatePresenceOf = (value) ->
   value and value.length
 
 
-# the below 4 validations only apply if you are signing up traditionally
-UserSchema.path("name").validate ((name) ->
-  
-  # if you are authenticating by any of the oauth strategies, don't validate
-  return true  if authTypes.indexOf(@provider) isnt -1
-  name.length
-), "Name cannot be blank"
 UserSchema.path("email").validate ((email) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   email.length
 ), "Email cannot be blank"
+UserSchema.path("email").validate ((email, fn) ->
+  User = mongoose.model("User")
+  
+  # if you are authenticating by any of the oauth strategies, don't validate
+  fn true  if authTypes.indexOf(@provider) isnt -1
+  
+  # Check only when it is a new user or when email field is modified
+  if @isNew or @isModified("email")
+    User.find(email: email).exec (err, users) ->
+      fn not err and users.length is 0
+
+  else
+    fn true
+), "Email already exists"
 UserSchema.path("username").validate ((username) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
@@ -113,6 +140,11 @@ UserSchema.methods =
   ###
   encryptPassword: (password) ->
     return ""  unless password
-    crypto.createHmac("sha1", @salt).update(password).digest "hex"
+    encrypred = undefined
+    try
+      encrypred = crypto.createHmac("sha1", @salt).update(password).digest("hex")
+      return encrypred
+    catch err
+      return ""
 
 mongoose.model "User", UserSchema

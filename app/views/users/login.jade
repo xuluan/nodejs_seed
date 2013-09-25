@@ -6,7 +6,6 @@ block auth
       .eight.columns
         .row
           input(type='hidden', name='_csrf', value="#{csrf_token}")
-          p.ten.columns.error= message
         .row
           .four.columns
             label.inline(for='email') Email

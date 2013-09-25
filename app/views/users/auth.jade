@@ -4,7 +4,17 @@ block main
   h1= title
 
 block content
-  .offset0
+
+
+  .login
+    block auth
+    
+  center
+    br
+    h2 OR
+    br    
+    
+  .3party
     a(href="/auth/facebook")
       img(src="/img/facebook.png")
     a(href="/auth/github")
@@ -16,10 +26,4 @@ block content
     a(href="/auth/linkedin")
       img(src="/img/linkedin.png")
 
-  center
-    br
-    h2 OR
-    br
 
-  .login
-    block auth
