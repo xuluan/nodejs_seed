@@ -53,31 +53,37 @@ UserSchema.virtual("password").set((password) ->
 ).get ->
   @_password
 
+UserSchema.virtual("password2").set((password) ->
+  @_password2 = password
+).get ->
+  @_password2
 
 ###
 Validations
 ###
 validatePresenceOf = (value) ->
-  value and value.length
+  value and (value.length in [4..10])
 
+
+UserSchema.path("email").index {unique:true}
 
 UserSchema.path("email").validate ((email) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
-  email.length
-), "Email cannot be blank"
+  mailPattern = /.+\@.+\..+/
+  email.match mailPattern
+), "Email isn't a valid email"
 UserSchema.path("email").validate ((email, fn) ->
   User = mongoose.model("User")
   
   # if you are authenticating by any of the oauth strategies, don't validate
-  fn true  if authTypes.indexOf(@provider) isnt -1
+  # fn true  if authTypes.indexOf(@provider) isnt -1
   
   # Check only when it is a new user or when email field is modified
   if @isNew or @isModified("email")
     User.find(email: email).exec (err, users) ->
       fn not err and users.length is 0
-
   else
     fn true
 ), "Email already exists"
@@ -85,14 +91,27 @@ UserSchema.path("username").validate ((username) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
-  username.length
-), "Username cannot be blank"
+  validatePresenceOf username
+), "Username length must be between 4 to 20"
 UserSchema.path("hashed_password").validate ((hashed_password) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
-  hashed_password.length
-), "Password cannot be blank"
+  if @isNew
+    validatePresenceOf(@_password)
+  else
+    hashed_password.length
+), "Password length must be between 4 to 20"
+UserSchema.path("hashed_password").validate ((hashed_password) ->
+  
+  # if you are authenticating by any of the oauth strategies, don't validate
+  return true  if authTypes.indexOf(@provider) isnt -1
+  if @isNew
+    @_password == @_password2
+  else
+    hashed_password.length
+), "Password must be equal with Confirm Password"
+
 
 ###
 Pre-save hook

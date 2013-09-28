@@ -1,24 +1,30 @@
 
 ===TODO:
 1 auth
-- unique crash
-- signup logic
-- error message and validation
-- password update/ users show
-- home auth
-- google auth
-- passport token
+ 
 
-2 validation
-3 login and add bookmark
-4 test
+
+a signup validation
+- usernmae match format
+
+- email match format
+- username 4 - 20
+- passowrd 4-20
+- password == password2
+- emai unique
+
+b password update/ users show
+
+c home auth
+d google auth
+e passport token
+
+2 login and add bookmark
+3 test
+4 forgot password
 5 deploy and production mode
-6 how to keep obj when switch controller
-7 paging
-8 grunt:
-- how to setup livereload
-- how to setup karma
-- how to create distribut
+6 paging
+7 freemark
 
 ===DONE
 - jade to ejs
@@ -29,3 +35,6 @@
 - rest api
 - location
 - signup/ login/ logout
+- how to setup karma
+- how to create distribut
+- error message
