@@ -77,11 +77,36 @@ exports.create = (req, res) ->
 
 
 
+exports.update = (req, res) ->
+
+  user =  req.profile
+  rc = user.change_password(req.body.password, req.body.new_password, req.body.new_password2 )
+  if rc
+    console.log rc
+    return res.render "users/show",
+      errors: [rc]
+      title: user.name
+      user: user
+  else
+    console.log "user.save"
+    user.save (err) ->
+      if err
+        console.dir err
+
+        return res.render "users/show",
+          errors: utils.errors(err.errors)
+          title: user.name
+          user: user
+      else
+        return res.redirect "/"
+
+
 ###
 Show profile
 ###
 exports.show = (req, res) ->
   user = req.profile
+
   res.render "users/show",
     title: user.name
     user: user
@@ -92,6 +117,7 @@ exports.show = (req, res) ->
 Find user by id
 ###
 exports.user = (req, res, next, id) ->
+  console.log "exports.user " + id
   User.findOne(_id: id).exec (err, user) ->
     return next(err)  if err
     return next(new Error("Failed to load User " + id))  unless user

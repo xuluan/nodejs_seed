@@ -58,6 +58,11 @@ UserSchema.virtual("password2").set((password) ->
 ).get ->
   @_password2
 
+UserSchema.virtual("password_change").set((password_change) ->
+  @_password_change = password_change
+).get ->
+  @_password_change
+
 ###
 Validations
 ###
@@ -97,7 +102,7 @@ UserSchema.path("hashed_password").validate ((hashed_password) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
-  if @isNew
+  if @isNew or @_password_change
     validatePresenceOf(@_password)
   else
     hashed_password.length
@@ -106,7 +111,7 @@ UserSchema.path("hashed_password").validate ((hashed_password) ->
   
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
-  if @isNew
+  if @isNew or @_password_change
     @_password == @_password2
   else
     hashed_password.length
@@ -165,5 +170,23 @@ UserSchema.methods =
       return encrypred
     catch err
       return ""
+
+  change_password: (password, newpassword, newpassword2) ->
+    return "old password error" unless @authenticate(password)
+    console.log @
+    @set('password', newpassword)
+    @set('password2', newpassword2)
+    @set('password_change', true)
+
+
+    console.log "self2 " +@
+
+    return null
+
+      
+
+
+
+
 
 mongoose.model "User", UserSchema

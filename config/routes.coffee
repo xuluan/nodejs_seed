@@ -6,6 +6,7 @@ module.exports = (server, config, passport, auth) ->
   server.get "/signup", users.signup
   server.get "/logout", users.logout
   server.post "/users", users.create
+  server.post "/users/update/:userId", users.update
   server.post "/users/session", passport.authenticate("local",
     failureRedirect: "/login"
     failureFlash: "Invalid email or password."
@@ -13,7 +14,7 @@ module.exports = (server, config, passport, auth) ->
   server.get "/users/:userId", users.show
   
   server.param('userId', users.user)
-  
+ 
   server.get "/", (req, res) ->
     res.render "index"
     

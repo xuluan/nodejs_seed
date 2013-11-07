@@ -28,7 +28,6 @@ require('./config/express')(server, config, passport)
 require('./config/routes')(server, config, passport, auth)
 
 port = process.env.PORT || config['port']
-
 http.createServer(server).listen port , ->
   console.log 'Express server listening on port ' + port
   
